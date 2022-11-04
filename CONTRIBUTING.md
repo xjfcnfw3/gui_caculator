@@ -24,47 +24,8 @@ git checkout -b 325-add-japanese-translations
 ```
 
 ### Get the test suite running
+파이썬을 설치해야 한다.
 
-Make sure you're using a recent ruby and have the `bundler` gem installed, at
-least version `1.14.3`.
-
-You'll also need chrome installed in order to run cucumber scenarios.
-
-Now install the development dependencies:
-
-```sh
-bundle install
-```
-
-Then install javascript dependencies with [Yarn] (requires a current version of [Node.js]):
-
-```sh
-bin/yarn install
-```
-
-JS assets are located in `app/javascript/active_admin`. The config will take care of compiling a complete bundle with [Rollup] using the `build` script and exported to `app/assets/javascripts/active_admin/base.js` ready to be used by Sprockets.
-
-To update javascript bundle run (add `-w` flag for watch mode):
-
-```sh
-bin/yarn build
-```
-
-Now you should be able to run the entire suite using:
-
-```sh
-bin/rake
-```
-
-The test run will generate a sample Rails application in `tmp/test_apps` to run the
-tests against.
-
-If you want to test against a Rails version different from the latest, make sure
-you use the correct Gemfile, for example:
-
-```sh
-export BUNDLE_GEMFILE=gemfiles/rails_61/Gemfile
-```
 
 **Warning** SCSS assets are aimed to be used indifferently with Sprockets **and** webpacker.
 As such, make sure not to use any sass-rails directives such as `asset-url` or `image-url`.
