@@ -27,7 +27,7 @@ Please read [CONTRIBUTING.md](https://github.com/xjfcnfw3/gui_caculator/blob/mai
 
 ## Authors
 
-* **kimminsu**
+* **kimminsu** [github](https://github.com/xjfcnfw3)
 
 ## License
 
