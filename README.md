@@ -26,8 +26,7 @@ Please read [CONTRIBUTING.md](https://github.com/xjfcnfw3/gui_caculator/blob/mai
 
 
 ## Authors
-
-* **kimminsu** [github](https://github.com/xjfcnfw3)
+공부하는박사곰(https://studyingrabbit.tistory.com/23)
 
 ## License
 
