@@ -36,7 +36,7 @@ Please read [CONTRIBUTING.md](https://github.com/xjfcnfw3/gui_caculator/blob/mai
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/xjfcnfw3/gui_caculator/blob/main/LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/xjfcnfw3/gui_caculator/blob/main/LICENSE) file for details
 
 ## Acknowledgments
 
