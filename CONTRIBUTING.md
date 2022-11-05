@@ -24,7 +24,8 @@ git checkout -b 325-add-japanese-translations
 ```
 
 ### Get the test suite running
-파이썬을 설치해야 한다.
+must install python3
+must install pyqt5
 
 
 **Warning** SCSS assets are aimed to be used indifferently with Sprockets **and** webpacker.
