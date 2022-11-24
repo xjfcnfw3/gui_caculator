@@ -13,6 +13,7 @@ class Main(QDialog):
         layout_operation = QGridLayout()
         layout_clear_equal = QGridLayout()
         layout_number = QGridLayout()
+        layout_other_operation = QGridLayout()
         layout_equation_solution = QGridLayout()
 
         ### 수식 입력과 답 출력을 위한 LineEdit 위젯 생성
@@ -33,6 +34,12 @@ class Main(QDialog):
         button_power = QPushButton("x^2")
         button_root = QPushButton("x^2/1")
 
+        ### =, clear, backspace 버튼 생성
+        button_equal = QPushButton("=")
+        button_clear = QPushButton("C")
+        button_clear_entry = QPushButton("CE")
+        button_backspace = QPushButton("Backspace")
+
         ### 사칙연산 버튼을 클릭했을 때, 각 사칙연산 부호가 수식창에 추가될 수 있도록 시그널 설정
         button_plus.clicked.connect(lambda state, operation = "+": self.button_operation_clicked(operation))
         button_minus.clicked.connect(lambda state, operation = "-": self.button_operation_clicked(operation))
@@ -40,20 +47,16 @@ class Main(QDialog):
         button_division.clicked.connect(lambda state, operation = "/": self.button_operation_clicked(operation))
 
         ### 사칙연산 버튼을 layout_operation 레이아웃에 추가
-        layout_operation.addWidget(button_mod, 0, 0)
-        layout_operation.addWidget(button_reciprocal ,1, 0)
-        layout_operation.addWidget(button_power, 1, 1)
-        layout_operation.addWidget(button_root, 1, 2)
-        layout_operation.addWidget(button_plus, 0, 1)
-        layout_operation.addWidget(button_minus, 0, 2)
-        layout_operation.addWidget(button_product, 0, 3)
-        layout_operation.addWidget(button_division, 0, 4)
+        layout_other_operation.addWidget(button_reciprocal ,0, 0)
+        layout_other_operation.addWidget(button_power, 0, 1)
+        layout_other_operation.addWidget(button_root, 0, 2)
+        layout_operation.addWidget(button_division, 0, 0)
 
-        ### =, clear, backspace 버튼 생성
-        button_equal = QPushButton("=")
-        button_clear = QPushButton("C")
-        button_clear_entry = QPushButton("CE")
-        button_backspace = QPushButton("Backspace")
+        layout_operation.addWidget(button_product, 1, 0)
+        layout_operation.addWidget(button_minus, 2, 0)
+        layout_operation.addWidget(button_plus, 3, 0)
+        layout_operation.addWidget(button_equal, 4, 0)
+
 
         ### =, clear, backspace 버튼 클릭 시 시그널 설정
         button_equal.clicked.connect(self.button_equal_clicked)
@@ -61,10 +64,10 @@ class Main(QDialog):
         button_backspace.clicked.connect(self.button_backspace_clicked)
 
         ### =, clear, backspace 버튼을 layout_clear_equal 레이아웃에 추가
-        layout_clear_equal.addWidget(button_clear, 0, 0)
-        layout_clear_equal.addWidget(button_backspace, 0, 1)
-        layout_clear_equal.addWidget(button_equal, 0, 2)
-        layout_clear_equal.addWidget(button_clear_entry, 0, 3)
+        layout_clear_equal.addWidget(button_mod, 0, 0)
+        layout_clear_equal.addWidget(button_clear_entry, 0, 1)
+        layout_clear_equal.addWidget(button_clear, 0, 2)
+        layout_clear_equal.addWidget(button_backspace, 0, 3)
 
         ### 숫자 버튼 생성하고, layout_number 레이아웃에 추가
         ### 각 숫자 버튼을 클릭했을 때, 숫자가 수식창에 입력 될 수 있도록 시그널 설정
@@ -84,15 +87,16 @@ class Main(QDialog):
         button_dot.clicked.connect(lambda state, num = ".": self.number_button_clicked(num))
         layout_number.addWidget(button_dot, 3, 2)
 
-        button_double_zero = QPushButton("00")
+        button_double_zero = QPushButton("+/-")
         button_double_zero.clicked.connect(lambda state, num = "00": self.number_button_clicked(num))
         layout_number.addWidget(button_double_zero, 3, 0)
 
         ### 각 레이아웃을 main_layout 레이아웃에 추가
-        main_layout.addLayout(layout_equation_solution, 0, 0)
-        main_layout.addLayout(layout_operation, 1, 0)
-        main_layout.addLayout(layout_clear_equal, 2, 0)
-        main_layout.addLayout(layout_number, 3, 0)
+        main_layout.addLayout(layout_equation_solution, 0, 0, 1, 4)
+        main_layout.addLayout(layout_clear_equal, 1, 0, 1, 4)
+        main_layout.addLayout(layout_other_operation, 2, 0, 1, 3)
+        main_layout.addLayout(layout_operation, 2, 3, 5, 1)
+        main_layout.addLayout(layout_number, 3, 0, 4, 3)
 
         self.setLayout(main_layout)
         self.show()
