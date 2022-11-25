@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 
 class Main(QDialog):
     def __init__(self):
+        self.temp = 0;
+        self.operator = ""
         super().__init__()
         self.init_ui()
 
@@ -45,7 +47,7 @@ class Main(QDialog):
         button_minus.clicked.connect(lambda state, operation = "-": self.button_operation_clicked(operation))
         button_product.clicked.connect(lambda state, operation = "*": self.button_operation_clicked(operation))
         button_division.clicked.connect(lambda state, operation = "/": self.button_operation_clicked(operation))
-
+        
         ### 사칙연산 버튼을 layout_operation 레이아웃에 추가
         layout_other_operation.addWidget(button_reciprocal ,0, 0)
         layout_other_operation.addWidget(button_power, 0, 1)
@@ -76,7 +78,7 @@ class Main(QDialog):
             number_button_dict[number] = QPushButton(str(number))
             number_button_dict[number].clicked.connect(lambda state, num = number:
                                                        self.number_button_clicked(num))
-            if number >0:
+            if number > 0:
                 x,y = divmod(number-1, 3)
                 layout_number.addWidget(number_button_dict[number], x, y)
             elif number==0:
@@ -111,16 +113,47 @@ class Main(QDialog):
 
     def button_operation_clicked(self, operation):
         equation = self.equation.text()
-        equation += operation
-        self.equation.setText(equation)
+        self.operator = operation
+        self.temp = float(equation)
+        self.equation.setText("")
+
+    def operate(self, equation):
+        if self.operator == "+":
+            self.operator = ""
+            return self.temp + equation
+        elif self.operator == "-":
+            self.operator = ""
+            return self.temp - equation
+        elif self.operator == "*":
+            self.operator = ""
+            return  self.temp * equation
+        elif self.operator == "/":
+            self.operator = ""
+            return self.temp / equation
+        elif self.operator == "%":
+            self.operator = ""
+            return self.temp % equation
+    
+    def button_self_operation_clicked(self, operation):
+        equation = self.equation.text()
+        self.temp = float(equation)
+        if operation == "1/x":
+            self.temp = 1 / self.temp
+        elif operation == "x^2":
+            self.temp = self.temp ** 2
+        elif operation == "x^2/1":
+            self.temp = self.temp **(1/2)
+        self.equation.setText(str(self.temp))
 
     def button_equal_clicked(self):
         equation = self.equation.text()
-        solution = eval(equation)
+        equation = float(equation)
+        solution = self.operate(equation)
         self.equation.setText(str(solution))
 
     def button_clear_clicked(self):
-        self.equation.setText("")
+        self.temp = 0
+        self.operator = ""
         self.equation.setText("")
 
     def button_backspace_clicked(self):
